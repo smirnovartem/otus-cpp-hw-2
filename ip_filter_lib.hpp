@@ -1,4 +1,18 @@
 #include <vector>
+#include <algorithm>
+
+class ip_lex_compare
+{
+	static bool byte_compare(const std::string &a, const std::string &b)
+	{
+		return std::stoi(a) > std::stoi(b);
+	}
+	public:
+	bool operator()(const std::vector<std::string> &a, const std::vector<std::string> &b) const
+	{
+		return std::lexicographical_compare(a.cbegin(), a.cend(), b.cbegin(), b.cend(), byte_compare);
+	}
+}; 
 
 template<typename T, typename F>
 auto filter_by_lambda(const T &ip_pool, F lambda)

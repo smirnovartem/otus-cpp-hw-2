@@ -43,4 +43,10 @@ BOOST_AUTO_TEST_CASE(ip_filter_test_any)
     BOOST_CHECK(filter_by_lambda(v, any_byte_lambda(110)).size() == 0);
 }
 
+BOOST_AUTO_TEST_CASE(ip_filter_test_order)
+{
+    BOOST_CHECK( ip_lex_compare()(v[0], v[2]));
+    BOOST_CHECK(!ip_lex_compare()(v[1], v[3]));
+}
+
 BOOST_AUTO_TEST_SUITE_END()

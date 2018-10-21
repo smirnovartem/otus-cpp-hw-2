@@ -52,16 +52,7 @@ int main(int argc, char const *argv[])
 		}
 
 		// reverse lexicographically sort
-		std::sort(ip_pool.begin(), ip_pool.end(), [](auto a, auto b){
-			for (auto it_a = a.cbegin(), it_b = b.cbegin();
-				it_a != a.cend() && it_b != b.cend();
-				++it_a, ++it_b)
-			{
-				if (*it_a != *it_b)
-					return std::stoi(*it_a) > std::stoi(*it_b);
-			}
-			return false;
-		});
+		std::sort(ip_pool.begin(), ip_pool.end(), ip_lex_compare());
 
 		print_ip(ip_pool);
 
