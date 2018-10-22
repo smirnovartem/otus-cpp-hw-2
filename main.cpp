@@ -57,15 +57,15 @@ int main(int argc, char const *argv[])
 		print_ip(ip_pool);
 
 		// filter by first byte and output
-		auto ip_filter_1 = filter_by_lambda(ip_pool, first_n_bytes_lambda(1));
+		auto ip_filter_1 = filter_by_lambda(ip_pool, first_n_bytes_lambda("1"));
 		print_ip(ip_filter_1);
 
 		// filter by first and second bytes and output
-		auto ip_filter_2 = filter_by_lambda(ip_pool, first_n_bytes_lambda(46, 70));
+		auto ip_filter_2 = filter_by_lambda(ip_pool, first_n_bytes_lambda("46", "70"));
 		print_ip(ip_filter_2);
 
 		// filter by any byte and output
-		auto ip_filter_3 = filter_by_lambda(ip_pool, any_byte_lambda(46));
+		auto ip_filter_3 = filter_by_lambda(ip_pool, any_byte_lambda("46"));
 		print_ip(ip_filter_3);
 
 	}

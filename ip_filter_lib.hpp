@@ -1,11 +1,12 @@
 #include <vector>
+#include <string>
 #include <algorithm>
 
 class ip_lex_compare
 {
 	static bool byte_compare(const std::string &a, const std::string &b)
 	{
-		return std::stoi(a) > std::stoi(b);
+		return a.size() > b.size() || (a.size() == b.size() && a > b);
 	}
 	public:
 	bool operator()(const std::vector<std::string> &a, const std::vector<std::string> &b) const
@@ -30,21 +31,21 @@ template<typename ... Args>
 auto first_n_bytes_lambda(Args ... args)
 {
 	return [=](const auto &ip) -> bool {
-		std::vector<int> args_unpack{args...};
+		std::vector<std::string> args_unpack{args...};
 		auto limit = sizeof...(args) > ip.size() ? ip.size() : sizeof...(args);
 		
 		for (decltype(limit) i = 0; i < limit; ++i)
-			if (std::stoi(ip[i]) != args_unpack[i]) return false;
+			if (ip[i] != args_unpack[i]) return false;
 
 		return true;
 	};
 }
 
-auto any_byte_lambda(int byte)
+auto any_byte_lambda(std::string byte)
 {
 	return [=](const auto &ip) -> bool {
 		for (auto ip_part = ip.cbegin(); ip_part != ip.cend(); ++ip_part)
-			if (std::stoi(*ip_part) == byte)
+			if (*ip_part == byte)
 				return true;
 
 		return false;
