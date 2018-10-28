@@ -20,10 +20,7 @@ auto filter_by_lambda(const T &ip_pool, F lambda)
 {
 	T ip_filtered;
 	ip_filtered.reserve(ip_pool.size());
-	for (auto ip = ip_pool.cbegin(); ip != ip_pool.cend(); ++ip)
-	{
-		if (lambda(*ip)) ip_filtered.push_back(*ip);
-	}
+	std::copy_if(ip_pool.cbegin(), ip_pool.cend(), std::back_inserter(ip_filtered), lambda);
 	return ip_filtered;
 }
 
