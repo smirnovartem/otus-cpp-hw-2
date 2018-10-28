@@ -44,10 +44,6 @@ auto first_n_bytes_lambda(Args ... args)
 auto any_byte_lambda(std::string byte)
 {
 	return [=](const auto &ip) -> bool {
-		for (auto ip_part = ip.cbegin(); ip_part != ip.cend(); ++ip_part)
-			if (*ip_part == byte)
-				return true;
-
-		return false;
+		return std::find(ip.cbegin(), ip.cend(), byte) != ip.cend();
 	};
 }
