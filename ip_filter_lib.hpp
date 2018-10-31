@@ -27,7 +27,7 @@ auto first_n_bytes_lambda(Args ... args)
 {
 	return [=](const auto &ip) -> bool {
 		std::vector<int> args_unpack{args...};
-		auto limit = sizeof...(args) > ip.size() ? ip.size() : sizeof...(args);
+		auto limit = std::min(ip.size(), sizeof...(args));
 		
 		for (decltype(limit) i = 0; i < limit; ++i)
 			if (ip[i] != args_unpack[i]) return false;
