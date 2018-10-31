@@ -52,7 +52,7 @@ int main(int argc, char const *argv[])
 		}
 
 		// reverse lexicographically sort
-		std::sort(ip_pool.begin(), ip_pool.end(), std::greater<>());
+		std::sort(ip_pool.begin(), ip_pool.end(), std::greater<std::vector<int>>());
 
 		print_ip(ip_pool);
 
